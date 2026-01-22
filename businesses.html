@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Businesses | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb',
+            active: '#16a34a',       // green
+            pending: '#f59e0b',      // yellow
+            suspended: '#dc2626'     // red
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <span id="welcomeName">Welcome</span>
+        <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+<!-- Main -->
+    <main class="md:col-span-3 space-y-8">
+
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
+      <h1 class="text-2xl font-bold">Registered Businesses</h1>
+      <input type="text" id="searchInput" placeholder="Search by business name..."
+             class="mt-3 md:mt-0 border rounded-xl px-4 py-2 w-full md:w-64 focus:ring-2 focus:ring-accent focus:outline-none" />
+    </div>
+
+    <!-- Businesses List -->
+    <div id="businessList" class="space-y-4">
+      <!-- Individual business cards inserted by JS -->
+    </div>
+
+  </div>
+
+  <script>
+    feather.replace();
+
+    // --- Redirect if not logged in ---
+    if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // --- Logged-in user info ---
+    const userName = localStorage.getItem('myrevenue_user');
+    const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+    // --- Update welcome message ---
+    document.getElementById('welcomeName').textContent = `Welcome, ${userName}`;
+
+    // --- Mock businesses database ---
+    const businessData = {
+      '135876440': [
+        { name: 'rEnergy', type: 'Limited Company', status: 'Active', lastPayment: '10 Jan 2026' },
+        { name: 'rTech', type: 'Limited Company', status: 'Active', lastPayment: '10 Jan 2026' },
+        { name: 'rConstruction', type: 'Limited Company', status: 'Active', lastPayment: '10 Jan 2026' },
+        { name: 'rIndustries', type: 'Limited Company', status: 'Active', lastPayment: '10 Jan 2026' },
+        { name: 'rBasketball League', type: 'Limited Company', status: 'Active', lastPayment: '10 Jan 2026' },
+      ],
+      '987654321': [
+        { name: 'Patel Trading', type: 'Sole Trader', status: 'Active', lastPayment: '8 Jan 2026' },
+        { name: 'Atlantic Supplies', type: 'Limited Company', status: 'Suspended', lastPayment: '15 Dec 2025' }
+      ],
+      '555222111': [
+        { name: 'Morgan Tech', type: 'Sole Trader', status: 'Active', lastPayment: '5 Jan 2026' }
+      ]
+    };
+
+    let businesses = businessData[revenueNumber] || [];
+
+    const listContainer = document.getElementById('businessList');
+
+    function renderBusinesses(filter = '') {
+      listContainer.innerHTML = '';
+      const filtered = businesses.filter(b => b.name.toLowerCase().includes(filter.toLowerCase()));
+      if (filtered.length === 0) {
+        listContainer.innerHTML = '<p class="text-slate-500">No businesses found.</p>';
+        return;
+      }
+      filtered.forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row md:justify-between md:items-center';
+        card.innerHTML = `
+          <div>
+            <p class="font-semibold text-lg">${b.name}</p>
+            <p class="text-slate-500 text-sm">${b.type}</p>
+            <p class="text-slate-500 text-sm">Last Payment: ${b.lastPayment}</p>
+          </div>
+          <div class="mt-3 md:mt-0 flex items-center gap-4">
+            <span class="px-3 py-1 rounded-full text-white text-sm font-semibold ${b.status.toLowerCase() === 'active' ? 'bg-active' : b.status.toLowerCase() === 'pending' ? 'bg-pending' : 'bg-suspended'}">
+              ${b.status}
+            </span>
+            <button class="bg-accent text-white px-4 py-2 rounded-xl hover:opacity-90">View Details</button>
+          </div>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    // --- Initial render ---
+    renderBusinesses();
+
+    // --- Search filter ---
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', e => {
+      renderBusinesses(e.target.value);
+    });
+  </script>
+
+</body>
+</html>

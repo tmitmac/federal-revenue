@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb',
+            read: '#6b7280',      // gray
+            unread: '#2563eb'     // blue
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <span id="welcomeName">Welcome</span>
+        <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+<!-- Main -->
+    <main class="md:col-span-3 space-y-8">
+
+    <h1 class="text-2xl font-bold mb-6">Messages</h1>
+
+    <div class="flex flex-col md:flex-row gap-6">
+
+      <!-- Message list -->
+      <div class="md:w-1/3 bg-white rounded-2xl shadow p-4 overflow-y-auto h-[500px]">
+        <input type="text" id="searchInput" placeholder="Search messages..."
+               class="w-full border rounded-xl px-4 py-2 mb-4 focus:ring-2 focus:ring-accent focus:outline-none" />
+
+        <ul id="messageList" class="space-y-2">
+          <!-- Messages inserted here by JS -->
+        </ul>
+      </div>
+
+      <!-- Message preview -->
+      <div class="md:w-2/3 bg-white rounded-2xl shadow p-6 h-[500px] flex flex-col">
+        <div id="messagePreview" class="flex-1 overflow-y-auto">
+          <p class="text-slate-500">Select a message to view it</p>
+        </div>
+        <div class="mt-4 flex gap-2">
+          <button id="markReadBtn" class="bg-accent text-white px-4 py-2 rounded-xl hover:opacity-90">Mark as Read</button>
+          <button id="replyBtn" class="bg-slate-100 px-4 py-2 rounded-xl hover:bg-slate-200">Reply</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    feather.replace();
+
+    // --- Redirect if not logged in ---
+    if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // --- Logged-in user info ---
+    const userName = localStorage.getItem('myrevenue_user');
+    const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+    // --- Update welcome message ---
+    document.getElementById('welcomeName').textContent = `Welcome, ${userName}`;
+
+    // --- Mock messages database ---
+    const messageData = {
+      '135876440': [
+        { id: 1, sender: 'FRD', subject: 'Income Tax Reminder', date: '15 Jan 2026', content: 'Your 2025 Income Tax Return is due by 31 March 2026.', read: false },
+        { id: 2, sender: 'FRD', subject: 'Refund Processed', date: '10 Jan 2026', content: 'Your refund of $50 has been processed and will arrive shortly.', read: true },
+        { id: 3, sender: 'FRD', subject: 'Payment Confirmation', date: '5 Jan 2026', content: 'We have received your payment of $420.50.', read: true }
+      ],
+      '987654321': [
+        { id: 1, sender: 'FRD', subject: 'Suspended Business Notice', date: '12 Jan 2026', content: 'Your business Atlantic Supplies has been suspended due to unpaid taxes.', read: false }
+      ],
+      '555222111': [
+        { id: 1, sender: 'FRD', subject: 'Refund Applied', date: '5 Jan 2026', content: 'Your refund of $50 has been applied to your account.', read: true }
+      ]
+    };
+
+    let messages = messageData[revenueNumber] || [];
+
+    const messageList = document.getElementById('messageList');
+    const messagePreview = document.getElementById('messagePreview');
+    const markReadBtn = document.getElementById('markReadBtn');
+    const replyBtn = document.getElementById('replyBtn');
+
+    let selectedMessageId = null;
+
+    function renderMessageList(filter = '') {
+  messageList.innerHTML = '';
+  const filtered = messages.filter(m => m.subject.toLowerCase().includes(filter.toLowerCase()));
+  if (filtered.length === 0) {
+    messageList.innerHTML = '<li class="text-slate-500">No messages found.</li>';
+    return;
+  }
+  filtered.forEach(m => {
+    const li = document.createElement('li');
+    li.className = `p-3 rounded-xl cursor-pointer flex justify-between items-center hover:bg-slate-100 ${m.read ? 'text-read' : 'text-unread font-semibold'}`;
+    li.textContent = `${m.subject} (${m.date})`;
+    li.dataset.id = m.id; // store message ID
+    li.onclick = () => showMessage(m.id);
+    messageList.appendChild(li);
+  });
+}
+
+function showMessage(id) {
+  const msg = messages.find(m => m.id === id);
+  if (!msg) return;
+  selectedMessageId = id;
+
+  // Reset all li styles
+  document.querySelectorAll('#messageList li[data-id]').forEach(li => {
+    li.classList.remove('bg-slate-100', 'text-accent', 'font-bold');
+    const liId = parseInt(li.dataset.id);
+    const liMsg = messages.find(m => m.id === liId);
+    if (liMsg.read) {
+      li.classList.add('text-read', 'font-semibold');
+      li.classList.remove('text-unread');
+    } else {
+      li.classList.add('text-unread', 'font-semibold');
+      li.classList.remove('text-read');
+    }
+  });
+
+  // Highlight only clicked li
+  const clickedLi = document.querySelector(`#messageList li[data-id="${id}"]`);
+  if (clickedLi) {
+    clickedLi.classList.add('bg-slate-100', 'text-accent', 'font-bold');
+    clickedLi.classList.remove('text-read', 'text-unread', 'font-semibold');
+  }
+
+  // Show message content in preview
+  messagePreview.innerHTML = `
+    <h2 class="font-bold text-lg mb-2">${msg.subject}</h2>
+    <p class="text-slate-500 text-sm mb-4">From: ${msg.sender} | Date: ${msg.date}</p>
+    <p>${msg.content}</p>
+  `;
+}
+
+
+
+
+    markReadBtn.addEventListener('click', () => {
+      if (selectedMessageId !== null) {
+        const msg = messages.find(m => m.id === selectedMessageId);
+        if (msg) msg.read = true;
+        renderMessageList(searchInput.value);
+      }
+    });
+
+    replyBtn.addEventListener('click', () => {
+      if (selectedMessageId !== null) {
+        alert('Reply functionality is not implemented in this mock portal.');
+      }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', e => {
+      renderMessageList(e.target.value);
+    });
+
+    // --- Initial render ---
+    renderMessageList();
+  </script>
+
+</body>
+</html>

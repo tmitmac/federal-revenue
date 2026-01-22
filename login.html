@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in to MyRevenue | Federal Revenue Department</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+  <!-- Login Card -->
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-lg p-8">
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="w-12 h-12 bg-primary text-white font-bold rounded-xl mx-auto flex items-center justify-center">FRD</div>
+      <h1 class="text-2xl font-bold mt-4">Log in to MyRevenue</h1>
+      <p class="text-sm text-slate-500">Federal Revenue Department · Square Country</p>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4"></div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="text-sm font-medium">Citizenship Number</label>
+        <input id="revenueNumber" type="text" placeholder="e.g. 123456789"
+               class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Password</label>
+        <input id="password" type="password" placeholder="••••••••"
+               class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+      </div>
+
+      <button type="submit" class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90">
+        Log in
+      </button>
+    </form>
+
+    <!-- Links -->
+    <div class="mt-6 text-sm text-center text-slate-600 space-y-2">
+      <a href="forgot.html" class="block hover:underline">Forgot your password?</a>
+      <a href="register.html" class="block hover:underline">Create a MyRevenue account</a>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-xs text-slate-400 text-center mt-6">
+      This is a secure government service. Unauthorised access is prohibited.
+    </p>
+  </div>
+
+  <script>
+  const form = document.getElementById('loginForm');
+  const errorBox = document.getElementById('error');
+
+  // MOCK USER DATABASE (DEMO ONLY)
+  const users = [
+    {
+      revenueNumber: '135876440',
+      password: '1',
+      name: 'Ryan Parker'
+    },
+    {
+      revenueNumber: '987654321',
+      password: '2',
+      name: 'Jordan Patel'
+    },
+    {
+      revenueNumber: '555222111',
+      password: '3',
+      name: 'Morgan Lee'
+    }
+  ];
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const revenueNumber = document.getElementById('revenueNumber').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    const user = users.find(
+      u => u.revenueNumber === revenueNumber && u.password === password
+    );
+
+    if (user) {
+      // Mock session storage
+      localStorage.setItem('myrevenue_logged_in', 'true');
+      localStorage.setItem('myrevenue_user', user.name);
+      localStorage.setItem('myrevenue_revenue_number', user.revenueNumber);
+
+      // Redirect
+      window.location.href = 'my-revenue.html';
+    } else {
+      errorBox.textContent = 'The revenue number or password you entered is incorrect.';
+      errorBox.classList.remove('hidden');
+    }
+  });
+</script>
+
+
+</body>
+</html>

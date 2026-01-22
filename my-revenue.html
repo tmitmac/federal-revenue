@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyRevenue | Federal Revenue Department</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+  <span id="welcomeName">Welcome</span>
+  <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+</div>
+
+    </div>
+  </header>
+
+  <!-- Layout -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="md:col-span-3 space-y-8">
+
+      <!-- Alerts -->
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm">
+        <strong>Action required:</strong> Your 2025 Income Tax Return is due by <strong>31 March 2026</strong>.
+      </div>
+
+      <!-- Account summary -->
+      <section class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h3 class="text-sm text-slate-500 mb-2">Total balance</h3>
+          <p class="text-2xl font-bold">$420.50</p>
+          <p class="text-xs text-slate-500 mt-1">As at 22 Jan 2026</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h3 class="text-sm text-slate-500 mb-2">Next payment due</h3>
+          <p class="text-xl font-semibold">$420.50</p>
+          <p class="text-xs text-slate-500 mt-1">31 March 2026</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-6">
+          <h3 class="text-sm text-slate-500 mb-2">Refund status</h3>
+          <p class="text-green-600 font-semibold">No refund pending</p>
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="bg-white rounded-2xl shadow p-6">
+        <h2 class="font-semibold mb-4">Quick actions</h2>
+        <div class="grid md:grid-cols-4 gap-4 text-sm">
+          <button class="bg-accent text-white p-4 rounded-xl hover:opacity-90">File return</button>
+          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Make payment</button>
+          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">View statements</button>
+          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Send message</button>
+        </div>
+      </section>
+
+      <!-- Recent activity -->
+      <section class="bg-white rounded-2xl shadow p-6">
+        <h2 class="font-semibold mb-4">Recent activity</h2>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between border-b pb-2">
+            <span>Income tax payment received</span>
+            <span class="text-slate-500">10 Jan 2026</span>
+          </div>
+          <div class="flex justify-between border-b pb-2">
+            <span>Notice of assessment issued</span>
+            <span class="text-slate-500">8 Jan 2026</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Message sent to FRD</span>
+            <span class="text-slate-500">3 Jan 2026</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<script>
+  feather.replace();
+
+
+  // --- Protect page: redirect to login if not logged in ---
+  if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+
+  // --- Get logged-in user's name ---
+  const userName = localStorage.getItem('myrevenue_user');
+
+  // --- Update the welcome message ---
+  const welcomeSpan = document.getElementById('welcomeName');
+  if (welcomeSpan && userName) {
+    welcomeSpan.textContent = `Welcome, ${userName}`;
+  }
+
+
+  // --- Mock data for different users ---
+  const userData = {
+    '135876440': {
+      balance: 420.50,
+      nextPayment: 420.50,
+      refundStatus: 'No refund pending'
+    },
+    '987654321': {
+      balance: 1280.75,
+      nextPayment: 300.00,
+      refundStatus: 'Refund of $150 pending'
+    },
+    '555222111': {
+      balance: 0.00,
+      nextPayment: 0.00,
+      refundStatus: 'Refund of $75 pending'
+    }
+  };
+
+  const data = userData[revenueNumber] || {
+    balance: 0,
+    nextPayment: 0,
+    refundStatus: 'No refund pending'
+  };
+
+  // --- Update account summary ---
+  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(1) p.text-2xl').textContent = `$${data.balance.toFixed(2)}`;
+  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(2) p.text-xl').textContent = `$${data.nextPayment.toFixed(2)}`;
+  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(3) p').textContent = data.refundStatus;
+
+  // Optional: you could also dynamically change Recent Activity, Quick Actions, etc.
+</script>
+
+
+</body>
+</html>

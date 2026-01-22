@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refunds & Balances | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <span id="welcomeName">Welcome</span>
+        <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+        <!-- Main -->
+    <main class="md:col-span-3 space-y-8">
+
+    <!-- Summary Cards -->
+    <section class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h3 class="text-sm text-slate-500 mb-2">Total Balance</h3>
+        <p id="totalBalance" class="text-2xl font-bold">$0.00</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h3 class="text-sm text-slate-500 mb-2">Pending Refunds</h3>
+        <p id="pendingRefunds" class="text-green-600 text-xl font-semibold">$0.00</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h3 class="text-sm text-slate-500 mb-2">Overdue Balance</h3>
+        <p id="overdueBalance" class="text-red-600 text-xl font-semibold">$0.00</p>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="bg-white rounded-2xl shadow p-6">
+      <h2 class="font-semibold mb-4">Quick Actions</h2>
+      <div class="grid md:grid-cols-4 gap-4 text-sm">
+        <button class="bg-accent text-white p-4 rounded-xl hover:opacity-90">Request Refund</button>
+        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">View Statements</button>
+        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Make Payment</button>
+        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Contact FRD</button>
+      </div>
+    </section>
+
+    <!-- Recent Refunds Table -->
+    <section class="bg-white rounded-2xl shadow p-6">
+      <h2 class="font-semibold mb-4">Recent Refunds</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600">
+            <tr>
+              <th class="px-4 py-2 text-left">Date</th>
+              <th class="px-4 py-2 text-left">Type</th>
+              <th class="px-4 py-2 text-left">Amount</th>
+              <th class="px-4 py-2 text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody id="refundsTableBody" class="divide-y divide-slate-200">
+            <!-- Rows added by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    feather.replace();
+
+    // --- Redirect if not logged in ---
+    if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // --- Logged-in user info ---
+    const userName = localStorage.getItem('myrevenue_user');
+    const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+    // --- Update welcome message ---
+    document.getElementById('welcomeName').textContent = `Welcome, ${userName}`;
+
+    // --- Mock user refund & balance data ---
+    const userData = {
+      '135876440': {
+        totalBalance: 420.50,
+        refunds: [
+          { date: '15 Jan 2026', type: 'Income Tax Refund', amount: 50.00, status: 'Completed' },
+          { date: '10 Jan 2026', type: 'Overpayment Refund', amount: 25.00, status: 'Pending' }
+        ],
+        overdueBalance: 0.00
+      },
+      '987654321': {
+        totalBalance: 1280.75,
+        refunds: [
+          { date: '12 Jan 2026', type: 'Income Tax Refund', amount: 75.00, status: 'Pending' }
+        ],
+        overdueBalance: 300.00
+      },
+      '555222111': {
+        totalBalance: 0.00,
+        refunds: [
+          { date: '5 Jan 2026', type: 'Overpayment Refund', amount: 50.00, status: 'Completed' }
+        ],
+        overdueBalance: 0.00
+      }
+    };
+
+    const data = userData[revenueNumber] || {
+      totalBalance: 0,
+      refunds: [],
+      overdueBalance: 0
+    };
+
+    // --- Populate summary cards ---
+    document.getElementById('totalBalance').textContent = `$${data.totalBalance.toFixed(2)}`;
+    const pendingRefunds = data.refunds.filter(r => r.status.toLowerCase() === 'pending');
+    const pendingTotal = pendingRefunds.reduce((sum, r) => sum + r.amount, 0);
+    document.getElementById('pendingRefunds').textContent = pendingTotal > 0 ? `$${pendingTotal.toFixed(2)}` : '$0.00';
+    document.getElementById('overdueBalance').textContent = `$${data.overdueBalance.toFixed(2)}`;
+
+    // --- Populate refunds table ---
+    const tbody = document.getElementById('refundsTableBody');
+    if (data.refunds.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-2 text-slate-500">No refunds found.</td></tr>';
+    } else {
+      data.refunds.forEach(r => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="px-4 py-2">${r.date}</td>
+          <td class="px-4 py-2">${r.type}</td>
+          <td class="px-4 py-2">$${r.amount.toFixed(2)}</td>
+          <td class="px-4 py-2 text-${r.status.toLowerCase() === 'completed' ? 'green' : 'yellow'}-600 font-semibold">${r.status}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+
+</body>
+</html>

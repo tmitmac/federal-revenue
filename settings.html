@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            accent: '#2563eb',
+            success: '#16a34a',
+            danger: '#dc2626'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <span id="welcomeName">Welcome</span>
+        <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+        <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+<!-- Main -->
+    <main class="md:col-span-3 space-y-8">
+
+    <h1 class="text-2xl font-bold mb-4">Settings</h1>
+
+    <!-- Account Info -->
+    <section class="bg-white rounded-2xl shadow p-6 space-y-4">
+      <h2 class="font-semibold text-lg mb-2">Account Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-slate-500">Full Name</label>
+          <p id="accountName" class="mt-1 font-medium"></p>
+        </div>
+        <div>
+          <label class="text-sm text-slate-500">Revenue Number</label>
+          <p id="accountRevenue" class="mt-1 font-medium"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Change Password -->
+    <section class="bg-white rounded-2xl shadow p-6 space-y-4">
+      <h2 class="font-semibold text-lg mb-2">Change Password</h2>
+      <form id="passwordForm" class="space-y-4">
+        <div>
+          <label class="text-sm text-slate-500">Current Password</label>
+          <input type="password" id="currentPassword" class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+        </div>
+        <div>
+          <label class="text-sm text-slate-500">New Password</label>
+          <input type="password" id="newPassword" class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+        </div>
+        <div>
+          <label class="text-sm text-slate-500">Confirm New Password</label>
+          <input type="password" id="confirmPassword" class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+        </div>
+        <button type="submit" class="bg-accent text-white py-3 px-6 rounded-xl hover:opacity-90">Update Password</button>
+        <p id="passwordMessage" class="text-sm mt-2"></p>
+      </form>
+    </section>
+
+    <!-- Notification Preferences -->
+    <section class="bg-white rounded-2xl shadow p-6 space-y-4">
+      <h2 class="font-semibold text-lg mb-2">Notification Preferences</h2>
+      <div class="flex items-center gap-4">
+        <input type="checkbox" id="notifEmail" class="w-5 h-5 accent-accent" />
+        <label for="notifEmail" class="text-sm text-slate-600">Email notifications for new messages</label>
+      </div>
+      <div class="flex items-center gap-4">
+        <input type="checkbox" id="notifSMS" class="w-5 h-5 accent-accent" />
+        <label for="notifSMS" class="text-sm text-slate-600">SMS notifications for payment reminders</label>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    feather.replace();
+
+    // --- Redirect if not logged in ---
+    if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // --- Logged-in user info ---
+    const userName = localStorage.getItem('myrevenue_user');
+    const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+    document.getElementById('welcomeName').textContent = `Welcome, ${userName}`;
+    document.getElementById('accountName').textContent = userName;
+    document.getElementById('accountRevenue').textContent = revenueNumber;
+
+    // --- Mock password (for demo only) ---
+    const mockPasswords = {
+      '135876440': 'square123',
+      '987654321': 'ocean456',
+      '555222111': 'tech555'
+    };
+
+    const passwordForm = document.getElementById('passwordForm');
+    const passwordMessage = document.getElementById('passwordMessage');
+
+    passwordForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const current = document.getElementById('currentPassword').value;
+      const newPwd = document.getElementById('newPassword').value;
+      const confirmPwd = document.getElementById('confirmPassword').value;
+
+      if (current !== mockPasswords[revenueNumber]) {
+        passwordMessage.textContent = 'Current password is incorrect.';
+        passwordMessage.className = 'text-danger text-sm mt-2';
+        return;
+      }
+
+      if (newPwd !== confirmPwd) {
+        passwordMessage.textContent = 'New passwords do not match.';
+        passwordMessage.className = 'text-danger text-sm mt-2';
+        return;
+      }
+
+      // Update mock password
+      mockPasswords[revenueNumber] = newPwd;
+      passwordMessage.textContent = 'Password updated successfully!';
+      passwordMessage.className = 'text-success text-sm mt-2';
+
+      // Clear inputs
+      passwordForm.reset();
+    });
+
+    // --- Notification preferences ---
+    const notifEmail = document.getElementById('notifEmail');
+    const notifSMS = document.getElementById('notifSMS');
+
+    // Load preferences from localStorage if available
+    const prefs = JSON.parse(localStorage.getItem('myrevenue_prefs')) || {};
+    notifEmail.checked = prefs.email || false;
+    notifSMS.checked = prefs.sms || false;
+
+    // Save preferences on change
+    [notifEmail, notifSMS].forEach(input => {
+      input.addEventListener('change', () => {
+        localStorage.setItem('myrevenue_prefs', JSON.stringify({
+          email: notifEmail.checked,
+          sms: notifSMS.checked
+        }));
+      });
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+  <!-- Card -->
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-lg p-8">
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="w-12 h-12 bg-primary text-white font-bold rounded-xl mx-auto flex items-center justify-center">FRD</div>
+      <h1 class="text-2xl font-bold mt-4">Forgot Password</h1>
+      <p class="text-sm text-slate-500">Enter your citizenship number to recover your password</p>
+    </div>
+
+    <!-- Message Box -->
+    <div id="message" class="hidden text-sm rounded-lg p-3 mb-4"></div>
+
+    <!-- Form -->
+    <form id="forgotForm" class="space-y-4">
+      <div>
+        <label class="text-sm font-medium">Citizenship Number</label>
+        <input id="revenueNumber" type="text" placeholder="e.g. 123456789"
+               class="w-full mt-1 p-3 rounded-xl border focus:ring-2 focus:ring-accent focus:outline-none" required />
+      </div>
+
+      <button type="submit" class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90">
+        Recover Password
+      </button>
+    </form>
+
+    <!-- Links -->
+    <div class="mt-6 text-sm text-center text-slate-600 space-y-2">
+      <a href="login.html" class="block hover:underline">Back to login</a>
+      <a href="register.html" class="block hover:underline">Create a MyRevenue account</a>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-xs text-slate-400 text-center mt-6">
+      This is a secure government service. Unauthorised access is prohibited.
+    </p>
+
+  </div>
+
+  <script>
+    const forgotForm = document.getElementById('forgotForm');
+    const messageBox = document.getElementById('message');
+
+    // Load users from localStorage (or fallback to default mock users)
+    const users = JSON.parse(localStorage.getItem('myrevenue_users')) || [
+      { revenueNumber: '135876440', password: '1', name: 'Ryan Parker' },
+      { revenueNumber: '987654321', password: '2', name: 'Jordan Patel' },
+      { revenueNumber: '555222111', password: '3', name: 'Morgan Lee' }
+    ];
+
+    forgotForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const revenueNumber = document.getElementById('revenueNumber').value.trim();
+      const user = users.find(u => u.revenueNumber === revenueNumber);
+
+      if (user) {
+        messageBox.textContent = `Hello ${user.name}, your password is: "${user.password}" (demo only)`;
+        messageBox.className = 'bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-3 mb-4';
+        messageBox.classList.remove('hidden');
+      } else {
+        messageBox.textContent = 'No account found with that citizenship number.';
+        messageBox.className = 'bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4';
+        messageBox.classList.remove('hidden');
+      }
+
+      // Clear input
+      forgotForm.reset();
+    });
+  </script>
+
+</body>
+</html>

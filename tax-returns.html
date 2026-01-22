@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tax Returns | MyRevenue</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Bar -->
+  <header class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-white text-primary font-bold rounded-lg flex items-center justify-center">FRD</div>
+        <span class="font-semibold">MyRevenue</span>
+      </div>
+      <div class="flex items-center gap-4 text-sm">
+        <span id="welcomeName">Welcome</span>
+        <a href="login.html" class="bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 bg-white rounded-2xl shadow p-5 space-y-4 text-sm">
+      <a href="my-revenue.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="home"></i> Overview</a>
+      <a href="tax-returns.html" class="flex items-center gap-2 font-semibold text-primary"><i data-feather="file-text"></i> Tax returns</a>
+      <a href="payments.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="credit-card"></i> Payments</a>
+      <a href="refunds-balances.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="dollar-sign"></i> Refunds & balances</a>
+      <a href="businesses.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="briefcase"></i> Businesses</a>
+      <a href="messages.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="message-square"></i> Messages</a>
+      <a href="settings.html" class="flex items-center gap-2 text-slate-600 hover:text-primary"><i data-feather="settings"></i> Settings</a>
+    </aside>
+
+        <main class="md:col-span-3 space-y-8">
+
+
+    <h1 class="text-2xl font-bold mb-6">Your Tax Returns</h1>
+
+    <div id="taxReturnsContainer" class="space-y-4">
+      <!-- Tax return entries will be inserted here by JS -->
+    </div>
+
+  </div>
+
+  <script>
+    feather.replace();
+
+    // --- Protect page: redirect to login if not logged in ---
+    if (localStorage.getItem('myrevenue_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // --- Get logged-in user ---
+    const userName = localStorage.getItem('myrevenue_user');
+    const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+    // --- Update welcome message ---
+    const welcomeSpan = document.getElementById('welcomeName');
+    if (welcomeSpan && userName) {
+      welcomeSpan.textContent = `Welcome, ${userName}`;
+    }
+
+    // --- Mock tax return database ---
+    const taxData = {
+      '135876440': [
+        { year: 2025, status: 'Pending', amountDue: 420.50, dueDate: '31 March 2026' },
+        { year: 2024, status: 'Paid', amountDue: 380.00, dueDate: '31 March 2025' }
+      ],
+      '987654321': [
+        { year: 2025, status: 'Pending', amountDue: 300.00, dueDate: '31 March 2026' },
+        { year: 2024, status: 'Paid', amountDue: 250.00, dueDate: '31 March 2025' }
+      ],
+      '123456789': [
+        { year: 2025, status: 'Paid', amountDue: 0.00, dueDate: '31 March 2026' },
+        { year: 2024, status: 'Paid', amountDue: 75.00, dueDate: '31 March 2025' }
+      ]
+    };
+
+    const returns = taxData[revenueNumber] || [];
+
+    const container = document.getElementById('taxReturnsContainer');
+
+    if (returns.length === 0) {
+      container.innerHTML = '<p class="text-slate-600">No tax return records found.</p>';
+    } else {
+      returns.forEach(tr => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-2xl shadow p-6 flex justify-between items-center';
+
+        div.innerHTML = `
+          <div>
+            <p class="font-semibold">Tax Year: ${tr.year}</p>
+            <p class="text-slate-500 text-sm">Due Date: ${tr.dueDate}</p>
+          </div>
+          <div class="text-right">
+            <p class="${tr.status === 'Paid' ? 'text-green-600' : 'text-yellow-600'} font-semibold">${tr.status}</p>
+            <p class="text-slate-700 font-medium">$${tr.amountDue.toFixed(2)}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>
