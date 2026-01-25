@@ -101,19 +101,56 @@
     document.getElementById('welcomeName').textContent = `Welcome, ${userName}`;
 
     // --- Mock messages database ---
-    const messageData = {
-      '135876440': [
-        { id: 1, sender: 'FRD', subject: 'Income Tax Reminder', date: '15 Jan 2026', content: 'Your 2025 Income Tax Return is due by 31 March 2026.', read: false },
-        { id: 2, sender: 'FRD', subject: 'Refund Processed', date: '10 Jan 2026', content: 'Your refund of $50 has been processed and will arrive shortly.', read: true },
-        { id: 3, sender: 'FRD', subject: 'Payment Confirmation', date: '5 Jan 2026', content: 'We have received your payment of $420.50.', read: true }
-      ],
-      '849786600': [
-        { id: 1, sender: 'Ministry of Labour & Employment, FRD', subject: 'Congratulations!', date: '12 Jan 2026', content: 'Your business "Executive Special Sauces" has successfully completed its registration process. We wish you the best of luck in your future endeavours.', read: false }
-      ],
-      '555222111': [
-        { id: 1, sender: 'FRD', subject: 'Refund Applied', date: '5 Jan 2026', content: 'Your refund of $50 has been applied to your account.', read: true }
-      ]
-    };
+const messageData = {
+  '135876440': [
+    { 
+      id: 1, 
+      sender: 'Ministry of Business, Innovation, and Employment', 
+      subject: 'Notice of Inactivity', 
+      date: '10 Sep 2025', 
+      content: 'Dear Mr Parker, Member of Parliament for New Dublin, <br><br>At your request, your limited company, "rIndustries," has been transferred from your ownership to that of an elected board. As a result, "rIndustries" will be displayed as INACTIVE under your name. This status will remain in effect until ownership is reverted. <br><br>Many thanks, Kevin King, <br>Ministry of Business, Innovation, and Employment.', 
+      read: false 
+    },
+  ],
+  '849786600': [
+    { 
+      id: 1, 
+      sender: 'FRD', 
+      subject: 'Suspended Business Notice', 
+      date: '12 Jan 2026', 
+      content: 'Your business Atlantic Supplies has been suspended due to unpaid taxes.', 
+      read: false 
+    }
+  ],
+  '555222111': [
+    { 
+      id: 1, 
+      sender: 'FRD', 
+      subject: 'Refund Applied', 
+      date: '5 Jan 2026', 
+      content: 'Your refund of $50 has been applied to your account.', 
+      read: true 
+    }
+  ]
+};
+
+// --- Show message content in preview ---
+function showMessage(id) {
+  const msg = messages.find(m => m.id === id);
+  if (!msg) return;
+  selectedMessageId = id;
+
+  // Highlighting logic...
+  // (unchanged)
+
+  // Show message content in preview with HTML rendering
+  messagePreview.innerHTML = `
+    <h2 class="font-bold text-lg mb-2">${msg.subject}</h2>
+    <p class="text-slate-500 text-sm mb-4">From: ${msg.sender} | Date: ${msg.date}</p>
+    <p class="whitespace-pre-line">${msg.content}</p>
+  `;
+}
+
 
     let messages = messageData[revenueNumber] || [];
 
