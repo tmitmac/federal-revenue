@@ -55,63 +55,451 @@
     </aside>
 
     <!-- Main -->
-    <main class="md:col-span-3 space-y-8">
+<main class="md:col-span-3 space-y-6">
 
-      <!-- Alerts -->
-      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm">
-        <strong>Action required:</strong> Your 2025 Income Tax Return is due by <strong>31 March 2026</strong>.
+  <!-- Hero Header -->
+  <section class="bg-white rounded-2xl shadow overflow-hidden">
+
+    <div class="bg-primary px-8 py-7 text-white border-b border-white/10">
+
+      <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
+
+        <div>
+
+          <p class="uppercase tracking-[0.2em] text-xs text-white/70 mb-2">
+            Federal Revenue Department
+          </p>
+
+          <h1 class="text-4xl font-bold leading-tight">
+            MyRevenue Overview
+          </h1>
+
+          <p class="text-white/80 mt-3 max-w-3xl leading-relaxed text-sm">
+            Access your tax information, account balances, filing obligations,
+            refund activity, secure communications, and revenue services through
+            your official MyRevenue account.
+          </p>
+
+        </div>
+
+        <div class="bg-white/10 backdrop-blur border border-white/10 rounded-2xl px-6 py-5 min-w-[320px]">
+
+          <p class="text-xs uppercase tracking-wide text-white/70 mb-2">
+            Revenue Number
+          </p>
+
+          <p id="displayRevenueNumber" class="text-2xl font-semibold">
+            000000000
+          </p>
+
+          <div class="mt-5 flex items-center justify-between">
+
+            <div>
+              <p class="text-xs text-white/60 uppercase tracking-wide">
+                Account Status
+              </p>
+
+              <div class="flex items-center gap-2 mt-1 text-emerald-300 text-sm font-medium">
+                <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                Active and verified
+              </div>
+            </div>
+
+            <div class="text-right">
+              <p class="text-xs text-white/60 uppercase tracking-wide">
+                Tax Year
+              </p>
+
+              <p class="font-semibold">
+                2026–2027
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <!-- Account summary -->
-      <section class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="text-sm text-slate-500 mb-2">Total balance</h3>
-          <p class="text-2xl font-bold">$420.50</p>
-          <p class="text-xs text-slate-500 mt-1">As at 22 Jan 2026</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="text-sm text-slate-500 mb-2">Next payment due</h3>
-          <p class="text-xl font-semibold">$420.50</p>
-          <p class="text-xs text-slate-500 mt-1">31 March 2026</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="text-sm text-slate-500 mb-2">Refund status</h3>
-          <p class="text-green-600 font-semibold">No refund pending</p>
-        </div>
-      </section>
+    </div>
 
-      <!-- Quick actions -->
-      <section class="bg-white rounded-2xl shadow p-6">
-        <h2 class="font-semibold mb-4">Quick actions</h2>
-        <div class="grid md:grid-cols-4 gap-4 text-sm">
-          <button class="bg-accent text-white p-4 rounded-xl hover:opacity-90">File return</button>
-          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Make payment</button>
-          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">View statements</button>
-          <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Send message</button>
-        </div>
-      </section>
+    <!-- Overview Statistics -->
+    <div class="grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200">
 
-      <!-- Recent activity -->
-      <section class="bg-white rounded-2xl shadow p-6">
-        <h2 class="font-semibold mb-4">Recent activity</h2>
-        <div class="space-y-3 text-sm">
-          <div class="flex justify-between border-b pb-2">
-            <span>Income tax payment received</span>
-            <span class="text-slate-500">10 Jan 2026</span>
-          </div>
-          <div class="flex justify-between border-b pb-2">
-            <span>Notice of assessment issued</span>
-            <span class="text-slate-500">8 Jan 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Message sent to FRD</span>
-            <span class="text-slate-500">3 Jan 2026</span>
-          </div>
-        </div>
-      </section>
+      <div class="p-6">
 
-    </main>
-  </div>
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">
+          Total Account Balance
+        </p>
+
+        <p id="totalBalance" class="text-3xl font-bold text-slate-900">
+          $0.00
+        </p>
+
+        <p class="text-sm text-slate-500 mt-2">
+          Current combined balance across all accounts.
+        </p>
+
+      </div>
+
+      <div class="p-6">
+
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">
+          Next Payment Due
+        </p>
+
+        <p id="nextPayment" class="text-3xl font-bold text-slate-900">
+          $0.00
+        </p>
+
+        <p id="nextPaymentDate" class="text-sm text-slate-500 mt-2">
+          No upcoming payment obligations
+        </p>
+
+      </div>
+
+      <div class="p-6">
+
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">
+          Refund Status
+        </p>
+
+        <div id="refundStatus"
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-100 text-emerald-700 font-semibold text-sm">
+
+          <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+          No refund pending
+
+        </div>
+
+        <p class="text-sm text-slate-500 mt-3">
+          Updated after each account assessment.
+        </p>
+
+      </div>
+
+      <div class="p-6">
+
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">
+          Filing Compliance
+        </p>
+
+        <div id="complianceStatus"
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-100 text-amber-700 font-semibold text-sm">
+
+          <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+          Return due soon
+
+        </div>
+
+        <p class="text-sm text-slate-500 mt-3">
+          Filing obligations monitored automatically.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Important Notices -->
+  <section class="grid lg:grid-cols-3 gap-6">
+
+    <div class="lg:col-span-2 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+
+      <div class="flex gap-4">
+
+        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+          <i data-feather="alert-triangle"></i>
+        </div>
+
+        <div>
+
+          <h2 class="font-semibold text-amber-900 text-lg mb-2">
+            Action Required
+          </h2>
+
+          <p class="text-sm text-amber-800 leading-relaxed">
+            Your 2025–2026 Individual Income Tax Return is due by
+            <strong>31 March 2026</strong>. Ensure all information is submitted
+            before the due date to avoid late filing penalties or interest charges.
+          </p>
+
+          <div class="mt-5 flex flex-wrap gap-3">
+
+            <a href="file.html"
+              class="bg-amber-700 text-white px-5 py-3 rounded-xl text-sm font-medium hover:bg-amber-800 transition">
+              File Return
+            </a>
+
+            <button
+              class="bg-white border border-amber-300 text-amber-900 px-5 py-3 rounded-xl text-sm font-medium hover:bg-amber-100 transition">
+              View Filing Details
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Identity & Security -->
+    <div class="bg-white rounded-2xl shadow">
+
+      <div class="px-6 py-5 border-b border-slate-200">
+
+        <h2 class="text-lg font-semibold text-slate-900">
+          Identity & Security
+        </h2>
+
+      </div>
+
+      <div class="p-6 space-y-5">
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Identity Verification</span>
+          <span class="font-medium text-emerald-600">Verified</span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Two-Factor Authentication</span>
+          <span class="font-medium text-emerald-600">Enabled</span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Last Login</span>
+          <span class="font-medium text-slate-900">
+            22 Jan 2026 · 8:42 PM
+          </span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Secure Mailbox Status</span>
+          <span class="font-medium text-slate-900">Operational</span>
+        </div>
+
+        <div class="pt-5 border-t border-slate-200">
+
+          <button
+            class="w-full bg-slate-100 hover:bg-slate-200 transition text-sm font-medium rounded-xl py-3">
+            Review Security Settings
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Services -->
+  <section class="bg-white rounded-2xl shadow">
+
+    <div class="px-6 py-5 border-b border-slate-200">
+
+      <h2 class="text-lg font-semibold text-slate-900">
+        Revenue Services
+      </h2>
+
+      <p class="text-sm text-slate-500 mt-1">
+        Access commonly used services and taxpayer tools.
+      </p>
+
+    </div>
+
+    <div class="p-6 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+      <a href="file.html"
+        class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition">
+
+        <div class="flex items-center justify-between mb-4">
+
+          <div class="w-11 h-11 rounded-xl bg-blue-50 text-accent flex items-center justify-center">
+            <i data-feather="file-text"></i>
+          </div>
+
+          <i data-feather="arrow-right"
+            class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+        </div>
+
+        <h3 class="font-semibold text-slate-900 mb-1">
+          File Tax Return
+        </h3>
+
+        <p class="text-sm text-slate-500">
+          Submit or amend income tax returns electronically.
+        </p>
+
+      </a>
+
+      <button
+        class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition text-left">
+
+        <div class="flex items-center justify-between mb-4">
+
+          <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+            <i data-feather="credit-card"></i>
+          </div>
+
+          <i data-feather="arrow-right"
+            class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+        </div>
+
+        <h3 class="font-semibold text-slate-900 mb-1">
+          Make Payment
+        </h3>
+
+        <p class="text-sm text-slate-500">
+          Pay tax balances securely through MyRevenue.
+        </p>
+
+      </button>
+
+      <button
+        class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition text-left">
+
+        <div class="flex items-center justify-between mb-4">
+
+          <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+            <i data-feather="download"></i>
+          </div>
+
+          <i data-feather="arrow-right"
+            class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+        </div>
+
+        <h3 class="font-semibold text-slate-900 mb-1">
+          Download Statements
+        </h3>
+
+        <p class="text-sm text-slate-500">
+          Access assessments, balances, and payment history.
+        </p>
+
+      </button>
+
+      <button
+        class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition text-left">
+
+        <div class="flex items-center justify-between mb-4">
+
+          <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+            <i data-feather="mail"></i>
+          </div>
+
+          <i data-feather="arrow-right"
+            class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+        </div>
+
+        <h3 class="font-semibold text-slate-900 mb-1">
+          Secure Messages
+        </h3>
+
+        <p class="text-sm text-slate-500">
+          Send and receive communications from FRD.
+        </p>
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- Activity + Account Information -->
+  <section class="grid lg:grid-cols-3 gap-6">
+
+    <!-- Activity -->
+    <div class="lg:col-span-2 bg-white rounded-2xl shadow overflow-hidden">
+
+      <div class="px-6 py-5 border-b border-slate-200">
+
+        <h2 class="text-lg font-semibold text-slate-900">
+          Recent Account Activity
+        </h2>
+
+        <p class="text-sm text-slate-500 mt-1">
+          Latest actions and notices associated with your account.
+        </p>
+
+      </div>
+
+      <div id="activityFeed" class="divide-y divide-slate-200">
+
+      </div>
+
+    </div>
+
+    <!-- Account Information -->
+    <div class="bg-white rounded-2xl shadow">
+
+      <div class="px-6 py-5 border-b border-slate-200">
+
+        <h2 class="text-lg font-semibold text-slate-900">
+          Account Information
+        </h2>
+
+      </div>
+
+      <div class="p-6 space-y-5">
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Taxpayer Type</span>
+          <span class="font-medium text-slate-900">
+            Individual Taxpayer
+          </span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Residency Status</span>
+          <span class="font-medium text-slate-900">
+            Resident
+          </span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Primary Filing Method</span>
+          <span class="font-medium text-slate-900">
+            Online Filing
+          </span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Preferred Refund Method</span>
+          <span class="font-medium text-slate-900">
+            Direct Credit
+          </span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500">Account Created</span>
+          <span class="font-medium text-slate-900">
+            14 Feb 2021
+          </span>
+        </div>
+
+        <div class="pt-5 border-t border-slate-200">
+
+          <button
+            class="w-full bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary transition">
+            Manage Account Details
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
 
 <script>
   feather.replace();
@@ -125,44 +513,198 @@
   // --- Get logged-in user's name ---
   const userName = localStorage.getItem('myrevenue_user');
 
-  // --- Update the welcome message ---
-  const welcomeSpan = document.getElementById('welcomeName');
-  if (welcomeSpan && userName) {
-    welcomeSpan.textContent = `Welcome, ${userName}`;
+ // --- Get revenue number ---
+const revenueNumber = localStorage.getItem('myrevenue_revenue_number');
+
+// --- Update the welcome message ---
+const welcomeSpan = document.getElementById('welcomeName');
+
+if (welcomeSpan && userName) {
+  welcomeSpan.textContent = `Welcome, ${userName}`;
+}
+
+// --- Display Revenue Number ---
+document.getElementById('displayRevenueNumber').textContent =
+  revenueNumber;
+
+// --- Mock user account data ---
+const userData = {
+
+  '135876440': {
+    balance: 420.50,
+    nextPayment: 420.50,
+    nextPaymentDate: '31 March 2026',
+    refundStatus: 'No refund pending',
+    compliance: 'Return due soon',
+    activities: [
+      {
+        title: 'Income tax payment received',
+        description: 'Payment processed through online banking services.',
+        date: '10 Jan 2026'
+      },
+      {
+        title: 'Notice of assessment issued',
+        description: 'Assessment for 2025–2026 income year completed.',
+        date: '8 Jan 2026'
+      },
+      {
+        title: 'Secure message received',
+        description: 'A new message has been added to your FRD mailbox.',
+        date: '3 Jan 2026'
+      }
+    ]
+  },
+
+  '849786600': {
+    balance: 1280.75,
+    nextPayment: 300.00,
+    nextPaymentDate: '31 March 2026',
+    refundStatus: 'Refund of $150 pending',
+    compliance: 'Payment overdue',
+    activities: [
+      {
+        title: 'Refund processing initiated',
+        description: 'Refund currently awaiting bank transfer.',
+        date: '12 Jan 2026'
+      },
+      {
+        title: 'Payment reminder issued',
+        description: 'Outstanding balance reminder generated.',
+        date: '7 Jan 2026'
+      }
+    ]
+  },
+
+  '555222111': {
+    balance: 0.00,
+    nextPayment: 0.00,
+    nextPaymentDate: 'No payment due',
+    refundStatus: 'Refund of $75 pending',
+    compliance: 'Up to date',
+    activities: [
+      {
+        title: 'Refund approved',
+        description: 'Refund approved for direct credit payment.',
+        date: '5 Jan 2026'
+      }
+    ]
   }
 
+};
 
-  // --- Mock data for different users ---
-  const userData = {
-    '135876440': {
-      balance: 420.50,
-      nextPayment: 420.50,
-      refundStatus: 'No refund pending'
-    },
-    '849786600': {
-      balance: 1280.75,
-      nextPayment: 300.00,
-      refundStatus: 'Refund of $150 pending'
-    },
-    '555222111': {
-      balance: 0.00,
-      nextPayment: 0.00,
-      refundStatus: 'Refund of $75 pending'
-    }
-  };
+const data = userData[revenueNumber] || {
+  balance: 0,
+  nextPayment: 0,
+  nextPaymentDate: 'No payment due',
+  refundStatus: 'No refund pending',
+  compliance: 'Up to date',
+  activities: []
+};
 
-  const data = userData[revenueNumber] || {
-    balance: 0,
-    nextPayment: 0,
-    refundStatus: 'No refund pending'
-  };
+// --- Populate Overview Cards ---
+document.getElementById('totalBalance').textContent =
+  `$${data.balance.toFixed(2)}`;
 
-  // --- Update account summary ---
-  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(1) p.text-2xl').textContent = `$${data.balance.toFixed(2)}`;
-  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(2) p.text-xl').textContent = `$${data.nextPayment.toFixed(2)}`;
-  document.querySelector('section.grid.md\\:grid-cols-3 > div:nth-child(3) p').textContent = data.refundStatus;
+document.getElementById('nextPayment').textContent =
+  `$${data.nextPayment.toFixed(2)}`;
 
-  // Optional: you could also dynamically change Recent Activity, Quick Actions, etc.
+document.getElementById('nextPaymentDate').textContent =
+  data.nextPaymentDate;
+
+// --- Refund Status ---
+const refundStatus = document.getElementById('refundStatus');
+
+if (data.refundStatus.toLowerCase().includes('pending')) {
+
+  refundStatus.className =
+    'inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-100 text-amber-700 font-semibold text-sm';
+
+  refundStatus.innerHTML = `
+    <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+    ${data.refundStatus}
+  `;
+
+}
+
+// --- Compliance Status ---
+const complianceStatus =
+  document.getElementById('complianceStatus');
+
+if (data.compliance === 'Payment overdue') {
+
+  complianceStatus.className =
+    'inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-rose-100 text-rose-700 font-semibold text-sm';
+
+  complianceStatus.innerHTML = `
+    <span class="w-2 h-2 bg-rose-500 rounded-full"></span>
+    Payment overdue
+  `;
+
+} else if (data.compliance === 'Up to date') {
+
+  complianceStatus.className =
+    'inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-100 text-emerald-700 font-semibold text-sm';
+
+  complianceStatus.innerHTML = `
+    <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+    Up to date
+  `;
+
+}
+
+// --- Populate Activity Feed ---
+const activityFeed =
+  document.getElementById('activityFeed');
+
+if (data.activities.length === 0) {
+
+  activityFeed.innerHTML = `
+    <div class="p-6 text-sm text-slate-500">
+      No recent activity available.
+    </div>
+  `;
+
+} else {
+
+  data.activities.forEach(activity => {
+
+    const item = document.createElement('div');
+
+    item.className =
+      'p-6 flex items-start justify-between gap-6';
+
+    item.innerHTML = `
+      <div class="flex gap-4">
+
+        <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+          <i data-feather="activity"></i>
+        </div>
+
+        <div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">
+            ${activity.title}
+          </h3>
+
+          <p class="text-sm text-slate-500 leading-relaxed">
+            ${activity.description}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="text-sm text-slate-500 whitespace-nowrap">
+        ${activity.date}
+      </div>
+    `;
+
+    activityFeed.appendChild(item);
+
+  });
+
+  feather.replace();
+}
 </script>
 
 
