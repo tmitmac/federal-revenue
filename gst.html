@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>GST & Sales Tax | Federal Revenue Department</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f2a44',
+            secondary: '#163a5f',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+
+  <!-- Top Government Bar -->
+  <div class="bg-slate-900 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-white text-slate-900 font-bold flex items-center justify-center">
+          FRD
+        </div>
+
+        <div>
+          <p class="font-medium">
+            Federal Revenue Department
+          </p>
+
+          <p class="text-xs text-slate-400">
+            Government of Square Country
+          </p>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-6 text-slate-300">
+        <a href="#" class="hover:text-white transition">Home</a>
+        <a href="#" class="hover:text-white transition">Individuals</a>
+        <a href="#" class="hover:text-white transition">Businesses</a>
+        <a href="#" class="hover:text-white transition">Contact</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-primary text-white border-b border-white/10">
+
+    <div class="max-w-7xl mx-auto px-6 py-16">
+
+      <div class="max-w-4xl">
+
+        <p class="uppercase tracking-[0.2em] text-xs text-white/60 mb-4">
+          Business Tax Information
+        </p>
+
+        <h1 class="text-5xl font-bold leading-tight">
+          GST & Sales Tax
+        </h1>
+
+        <p class="mt-6 text-lg text-white/80 leading-relaxed">
+          Information about Goods and Services Tax (GST), including registration,
+          filing obligations, taxable supplies, tax invoices, filing periods,
+          payments, and claiming GST credits.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+
+    <!-- Important Notice -->
+    <section class="bg-amber-50 border border-amber-200 rounded-2xl p-6 flex gap-4">
+
+      <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+        <i data-feather="alert-triangle"></i>
+      </div>
+
+      <div>
+
+        <h2 class="font-semibold text-amber-900 text-lg mb-2">
+          Important Information
+        </h2>
+
+        <p class="text-sm text-amber-800 leading-relaxed">
+          Businesses registered for GST are required to file GST returns and pay
+          any GST owing by the due date for their filing period. Penalties and
+          interest may apply where obligations are not met on time.
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- Quick Links -->
+    <section class="bg-white rounded-2xl shadow">
+
+      <div class="px-6 py-5 border-b border-slate-200">
+
+        <h2 class="text-xl font-semibold text-slate-900">
+          GST Services & Information
+        </h2>
+
+        <p class="text-sm text-slate-500 mt-1">
+          Guidance and services for GST-registered businesses and organisations.
+        </p>
+
+      </div>
+
+      <div class="p-6 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+        <a href="#registration"
+          class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition">
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="w-11 h-11 rounded-xl bg-blue-50 text-accent flex items-center justify-center">
+              <i data-feather="plus-circle"></i>
+            </div>
+
+            <i data-feather="arrow-right"
+              class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">
+            GST Registration
+          </h3>
+
+          <p class="text-sm text-slate-500">
+            Learn when and how to register for GST.
+          </p>
+
+        </a>
+
+        <a href="#filing"
+          class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition">
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="file-text"></i>
+            </div>
+
+            <i data-feather="arrow-right"
+              class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">
+            Filing Returns
+          </h3>
+
+          <p class="text-sm text-slate-500">
+            Information on GST return filing obligations and periods.
+          </p>
+
+        </a>
+
+        <a href="#rates"
+          class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition">
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="percent"></i>
+            </div>
+
+            <i data-feather="arrow-right"
+              class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">
+            GST Rates
+          </h3>
+
+          <p class="text-sm text-slate-500">
+            Standard, zero-rated, and exempt supplies.
+          </p>
+
+        </a>
+
+        <a href="#payments"
+          class="group border border-slate-200 rounded-2xl p-5 hover:border-accent hover:bg-slate-50 transition">
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="credit-card"></i>
+            </div>
+
+            <i data-feather="arrow-right"
+              class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">
+            Payments
+          </h3>
+
+          <p class="text-sm text-slate-500">
+            Information about GST payment methods and due dates.
+          </p>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- Main Information -->
+    <section class="grid lg:grid-cols-3 gap-6">
+
+      <!-- Left Content -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <!-- Registration -->
+        <section id="registration" class="bg-white rounded-2xl shadow">
+
+          <div class="px-6 py-5 border-b border-slate-200">
+            <h2 class="text-xl font-semibold text-slate-900">
+              GST Registration
+            </h2>
+          </div>
+
+          <div class="p-6 text-sm text-slate-700 leading-relaxed space-y-4">
+
+            <p>
+              Businesses and organisations carrying out taxable activities may be
+              required to register for GST where annual taxable turnover exceeds
+              the registration threshold prescribed by law.
+            </p>
+
+            <p>
+              Registered persons must charge GST on taxable supplies, retain
+              proper financial records, and file GST returns for each filing
+              period.
+            </p>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+
+              <h3 class="font-semibold text-slate-900 mb-3">
+                Common Registration Requirements
+              </h3>
+
+              <ul class="space-y-3">
+
+                <li class="flex gap-3">
+                  <i data-feather="check-circle" class="w-4 h-4 text-emerald-600 mt-0.5"></i>
+                  Carrying on a taxable activity
+                </li>
+
+                <li class="flex gap-3">
+                  <i data-feather="check-circle" class="w-4 h-4 text-emerald-600 mt-0.5"></i>
+                  Meeting the GST turnover threshold
+                </li>
+
+                <li class="flex gap-3">
+                  <i data-feather="check-circle" class="w-4 h-4 text-emerald-600 mt-0.5"></i>
+                  Holding a valid revenue number
+                </li>
+
+                <li class="flex gap-3">
+                  <i data-feather="check-circle" class="w-4 h-4 text-emerald-600 mt-0.5"></i>
+                  Maintaining accurate financial records
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- Filing -->
+        <section id="filing" class="bg-white rounded-2xl shadow">
+
+          <div class="px-6 py-5 border-b border-slate-200">
+            <h2 class="text-xl font-semibold text-slate-900">
+              Filing GST Returns
+            </h2>
+          </div>
+
+          <div class="p-6">
+
+            <div class="overflow-x-auto">
+
+              <table class="w-full text-sm">
+
+                <thead class="bg-slate-100 text-slate-600">
+
+                  <tr>
+                    <th class="px-5 py-4 text-left font-semibold">
+                      Filing Period
+                    </th>
+
+                    <th class="px-5 py-4 text-left font-semibold">
+                      Typical Users
+                    </th>
+
+                    <th class="px-5 py-4 text-left font-semibold">
+                      Due Date
+                    </th>
+                  </tr>
+
+                </thead>
+
+                <tbody class="divide-y divide-slate-200">
+
+                  <tr>
+                    <td class="px-5 py-4 font-medium">
+                      Monthly
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      Large businesses
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      28th of following month
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="px-5 py-4 font-medium">
+                      Two-Monthly
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      Standard filing period
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      28th following filing period
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="px-5 py-4 font-medium">
+                      Six-Monthly
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      Eligible small businesses
+                    </td>
+
+                    <td class="px-5 py-4 text-slate-600">
+                      28th following filing period
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="space-y-6">
+
+        <!-- Rates -->
+        <section id="rates" class="bg-white rounded-2xl shadow">
+
+          <div class="px-6 py-5 border-b border-slate-200">
+            <h2 class="text-lg font-semibold text-slate-900">
+              GST Rates
+            </h2>
+          </div>
+
+          <div class="p-6 space-y-4 text-sm">
+
+            <div class="flex justify-between">
+              <span class="text-slate-500">Standard Rate</span>
+              <span class="font-semibold text-slate-900">15%</span>
+            </div>
+
+            <div class="flex justify-between">
+              <span class="text-slate-500">Zero-Rated Supplies</span>
+              <span class="font-semibold text-slate-900">0%</span>
+            </div>
+
+            <div class="flex justify-between">
+              <span class="text-slate-500">Exempt Supplies</span>
+              <span class="font-semibold text-slate-900">Exempt</span>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- Payments -->
+        <section id="payments" class="bg-white rounded-2xl shadow">
+
+          <div class="px-6 py-5 border-b border-slate-200">
+            <h2 class="text-lg font-semibold text-slate-900">
+              Payment Methods
+            </h2>
+          </div>
+
+          <div class="p-6 space-y-4 text-sm text-slate-700">
+
+            <div class="flex gap-3">
+              <i data-feather="credit-card" class="w-4 h-4 text-slate-500 mt-0.5"></i>
+              Online banking
+            </div>
+
+            <div class="flex gap-3">
+              <i data-feather="smartphone" class="w-4 h-4 text-slate-500 mt-0.5"></i>
+              Online payment services
+            </div>
+
+            <div class="flex gap-3">
+              <i data-feather="briefcase" class="w-4 h-4 text-slate-500 mt-0.5"></i>
+              Approved business payment providers
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- Contact -->
+        <section class="bg-primary text-white rounded-2xl shadow overflow-hidden">
+
+          <div class="p-6">
+
+            <h2 class="text-xl font-semibold mb-2">
+              Need help?
+            </h2>
+
+            <p class="text-sm text-white/80 leading-relaxed">
+              Contact the Federal Revenue Department for assistance with GST
+              registration, filing obligations, or payments.
+            </p>
+
+            <button
+              class="mt-5 w-full bg-white text-primary py-3 rounded-xl font-medium hover:bg-slate-100 transition">
+              Contact FRD
+            </button>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 mt-16">
+
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+      <div class="grid md:grid-cols-4 gap-8 text-sm">
+
+        <div>
+          <h3 class="text-white font-semibold mb-3">
+            Federal Revenue Department
+          </h3>
+
+          <p class="leading-relaxed">
+            Administering taxation and revenue services for Square Country.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-medium mb-3">
+            Businesses
+          </h4>
+
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">GST & Sales Tax</a></li>
+            <li><a href="#" class="hover:text-white">Employer Obligations</a></li>
+            <li><a href="#" class="hover:text-white">Business Registration</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-medium mb-3">
+            Services
+          </h4>
+
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">File Returns</a></li>
+            <li><a href="#" class="hover:text-white">Make Payments</a></li>
+            <li><a href="#" class="hover:text-white">Tax Information</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-medium mb-3">
+            Government
+          </h4>
+
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Privacy</a></li>
+            <li><a href="#" class="hover:text-white">Accessibility</a></li>
+            <li><a href="#" class="hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script>
+    feather.replace();
+  </script>
+
+</body>
+</html>
