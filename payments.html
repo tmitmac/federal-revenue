@@ -56,55 +56,244 @@
     <main class="md:col-span-3 space-y-8">
 
 
-    <!-- Summary Cards -->
-    <section class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="text-sm text-slate-500 mb-2">Total Paid</h3>
-        <p id="totalPaid" class="text-2xl font-bold">$0.00</p>
+    <!-- Main Content -->
+<main class="md:col-span-3 space-y-6">
+
+  <!-- Page Header -->
+  <section class="bg-white rounded-2xl shadow overflow-hidden">
+    <div class="bg-primary px-8 py-6 text-white border-b border-white/10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <p class="uppercase tracking-[0.2em] text-xs text-white/70 mb-2">Payments and Account Management</p>
+          <h1 class="text-3xl font-bold">Payments</h1>
+          <p class="text-sm text-white/80 mt-2">
+            View payment activity, upcoming obligations, and account balances linked to your MyRevenue account.
+          </p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur px-5 py-4 rounded-2xl border border-white/10 min-w-[260px]">
+          <p class="text-xs uppercase tracking-wide text-white/70 mb-1">Citizenship ID</p>
+          <p id="displayRevenueNumber" class="text-xl font-semibold">000000000</p>
+
+          <div class="mt-4 flex items-center gap-2 text-sm text-emerald-300">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+            Account status active
+          </div>
+        </div>
       </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="text-sm text-slate-500 mb-2">Next Payment Due</h3>
-        <p id="nextPayment" class="text-xl font-semibold">$0.00</p>
-        <p id="nextPaymentDate" class="text-xs text-slate-500 mt-1">-</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Total Payments Received</p>
+        <p id="totalPaid" class="text-3xl font-bold text-slate-900">$0.00</p>
+        <p class="text-sm text-slate-500 mt-2">Processed for the current tax year.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="text-sm text-slate-500 mb-2">Refunds Pending</h3>
-        <p id="refundStatus" class="text-green-600 font-semibold">-</p>
+
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Outstanding Balance</p>
+        <p id="outstandingBalance" class="text-3xl font-bold text-slate-900">$0.00</p>
+        <p class="text-sm text-slate-500 mt-2">Amount currently owing to FRD.</p>
       </div>
-    </section>
+
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Next Due Date</p>
+        <p id="nextPaymentDate" class="text-2xl font-bold text-slate-900">—</p>
+        <p id="nextPayment" class="text-sm text-slate-500 mt-2">$0.00 due</p>
+      </div>
+
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Refund Status</p>
+        <p id="refundStatus" class="text-2xl font-bold text-emerald-600">No refunds pending</p>
+        <p class="text-sm text-slate-500 mt-2">Updated automatically each business day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  <section class="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex gap-4">
+    <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+      <i data-feather="alert-circle" class="w-5 h-5"></i>
+    </div>
+
+    <div>
+      <h2 class="font-semibold text-amber-900 mb-1">Important Information</h2>
+      <p class="text-sm text-amber-800 leading-relaxed">
+        Payments made after 5:00 PM may not appear in your account until the next business day.
+        Ensure all scheduled payments are completed before the due date to avoid penalties or interest.
+      </p>
+    </div>
+  </section>
+
+  <!-- Account Actions -->
+  <section class="grid lg:grid-cols-3 gap-6">
 
     <!-- Quick Actions -->
-    <section class="bg-white rounded-2xl shadow p-6">
-      <h2 class="font-semibold mb-4">Quick Actions</h2>
-      <div class="grid md:grid-cols-4 gap-4 text-sm">
-        <button class="bg-accent text-white p-4 rounded-xl hover:opacity-90">Make Payment</button>
-        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Download Statement</button>
-        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">View Refunds</button>
-        <button class="bg-slate-100 p-4 rounded-xl hover:bg-slate-200">Contact FRD</button>
+    <div class="lg:col-span-2 bg-white rounded-2xl shadow">
+      <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-semibold text-slate-900">Payment Services</h2>
+          <p class="text-sm text-slate-500 mt-1">
+            Manage payments, statements, and repayment arrangements.
+          </p>
+        </div>
       </div>
-    </section>
 
-    <!-- Recent Payments Table -->
-    <section class="bg-white rounded-2xl shadow p-6">
-      <h2 class="font-semibold mb-4">Recent Payments</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="bg-slate-100 text-slate-600">
-            <tr>
-              <th class="px-4 py-2 text-left">Date</th>
-              <th class="px-4 py-2 text-left">Type</th>
-              <th class="px-4 py-2 text-left">Amount</th>
-              <th class="px-4 py-2 text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody id="paymentsTableBody" class="divide-y divide-slate-200">
-            <!-- Rows added by JS -->
-          </tbody>
-        </table>
+      <div class="p-6 grid md:grid-cols-2 gap-4">
+
+        <button class="group border border-slate-200 rounded-2xl p-5 text-left hover:border-accent hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-50 text-accent flex items-center justify-center">
+              <i data-feather="credit-card" class="w-5 h-5"></i>
+            </div>
+            <i data-feather="arrow-right" class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">Make a Payment</h3>
+          <p class="text-sm text-slate-500">
+            Pay income tax, provisional tax, or outstanding balances securely online.
+          </p>
+        </button>
+
+        <button class="group border border-slate-200 rounded-2xl p-5 text-left hover:border-accent hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="download" class="w-5 h-5"></i>
+            </div>
+            <i data-feather="arrow-right" class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">Download Statements</h3>
+          <p class="text-sm text-slate-500">
+            Access official account statements and payment confirmations.
+          </p>
+        </button>
+
+        <button class="group border border-slate-200 rounded-2xl p-5 text-left hover:border-accent hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="refresh-cw" class="w-5 h-5"></i>
+            </div>
+            <i data-feather="arrow-right" class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">Request Refund</h3>
+          <p class="text-sm text-slate-500">
+            Review available credits and request a refund to your nominated account.
+          </p>
+        </button>
+
+        <button class="group border border-slate-200 rounded-2xl p-5 text-left hover:border-accent hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+              <i data-feather="phone" class="w-5 h-5"></i>
+            </div>
+            <i data-feather="arrow-right" class="w-4 h-4 text-slate-400 group-hover:text-accent"></i>
+          </div>
+
+          <h3 class="font-semibold text-slate-900 mb-1">Contact FRD</h3>
+          <p class="text-sm text-slate-500">
+            Send a secure message or contact a revenue officer for assistance.
+          </p>
+        </button>
+
       </div>
-    </section>
+    </div>
 
-  </div>
+    <!-- Account Summary -->
+    <div class="bg-white rounded-2xl shadow">
+      <div class="px-6 py-5 border-b border-slate-200">
+        <h2 class="text-lg font-semibold text-slate-900">Account Summary</h2>
+      </div>
+
+      <div class="p-6 space-y-5">
+
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-sm text-slate-500">Account Type</p>
+            <p class="font-semibold text-slate-900">Individual Taxpayer</p>
+          </div>
+
+          <span class="bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">
+            Compliant
+          </span>
+        </div>
+
+        <div class="border-t border-slate-200 pt-5 space-y-4">
+
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500">Current Tax Year</span>
+            <span class="font-medium text-slate-900">2025–2026</span>
+          </div>
+
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500">Last Payment Received</span>
+            <span id="lastPaymentDate" class="font-medium text-slate-900">—</span>
+          </div>
+
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500">Payment Method</span>
+            <span class="font-medium text-slate-900">Online Banking</span>
+          </div>
+
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500">Processing Status</span>
+            <span class="font-medium text-emerald-600">Up to date</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Payment History -->
+  <section class="bg-white rounded-2xl shadow overflow-hidden">
+
+    <div class="px-6 py-5 border-b border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h2 class="text-lg font-semibold text-slate-900">Payment History</h2>
+        <p class="text-sm text-slate-500 mt-1">
+          Official record of recent transactions processed by FRD.
+        </p>
+      </div>
+
+      <div class="flex gap-3">
+        <button class="border border-slate-300 px-4 py-2 rounded-xl text-sm hover:bg-slate-100">
+          Export CSV
+        </button>
+
+        <button class="bg-primary text-white px-4 py-2 rounded-xl text-sm hover:bg-secondary">
+          Download PDF Statement
+        </button>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+
+        <thead class="bg-slate-100 text-slate-600">
+          <tr>
+            <th class="px-6 py-4 text-left font-semibold">Reference</th>
+            <th class="px-6 py-4 text-left font-semibold">Date</th>
+            <th class="px-6 py-4 text-left font-semibold">Description</th>
+            <th class="px-6 py-4 text-left font-semibold">Method</th>
+            <th class="px-6 py-4 text-left font-semibold">Amount</th>
+            <th class="px-6 py-4 text-left font-semibold">Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="paymentsTableBody" class="divide-y divide-slate-200 bg-white">
+          <!-- Rows inserted by JS -->
+        </tbody>
+
+      </table>
+    </div>
+
+  </section>
+
+</main>
 
   <script>
     feather.replace();
@@ -142,42 +331,102 @@
 
     const payments = paymentData[revenueNumber] || [];
 
-    // --- Populate summary cards ---
-    const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
-    document.getElementById('totalPaid').textContent = `$${totalPaid.toFixed(2)}`;
+// --- Display Revenue Number ---
+document.getElementById('displayRevenueNumber').textContent = revenueNumber;
 
-    const pendingPayments = payments.filter(p => p.status !== 'Completed');
-    if (pendingPayments.length > 0) {
-      const nextPayment = pendingPayments[0];
-      document.getElementById('nextPayment').textContent = `$${nextPayment.amount.toFixed(2)}`;
-      document.getElementById('nextPaymentDate').textContent = nextPayment.date;
-    } else {
-      document.getElementById('nextPayment').textContent = `$0.00`;
-      document.getElementById('nextPaymentDate').textContent = 'None';
-    }
+// --- Populate summary cards ---
+const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
+document.getElementById('totalPaid').textContent = `$${totalPaid.toFixed(2)}`;
 
-    // Refund status (mock)
-    const refunds = payments.filter(p => p.type.toLowerCase().includes('refund'));
-    if (refunds.length > 0) {
-      const refundTotal = refunds.reduce((sum, r) => sum + r.amount, 0);
-      document.getElementById('refundStatus').textContent = `$${refundTotal.toFixed(2)} pending`;
-    } else {
-      document.getElementById('refundStatus').textContent = 'No refunds pending';
-    }
+// Mock outstanding balance
+const outstandingBalance = 0.00;
+document.getElementById('outstandingBalance').textContent = `$${outstandingBalance.toFixed(2)}`;
 
-    // --- Populate payments table ---
-    const tbody = document.getElementById('paymentsTableBody');
-    payments.forEach(p => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="px-4 py-2">${p.date}</td>
-        <td class="px-4 py-2">${p.type}</td>
-        <td class="px-4 py-2">$${p.amount.toFixed(2)}</td>
-        <td class="px-4 py-2 text-${p.status === 'Completed' ? 'green' : 'yellow'}-600 font-semibold">${p.status}</td>
-      `;
-      tbody.appendChild(row);
-    });
+// Next payment
+const pendingPayments = payments.filter(p => p.status !== 'Completed');
+
+if (pendingPayments.length > 0) {
+  const nextPayment = pendingPayments[0];
+
+  document.getElementById('nextPaymentDate').textContent = nextPayment.date;
+  document.getElementById('nextPayment').textContent =
+    `$${nextPayment.amount.toFixed(2)} due`;
+} else {
+  document.getElementById('nextPaymentDate').textContent = 'No upcoming payments';
+  document.getElementById('nextPayment').textContent = '$0.00 due';
+}
+
+// Refund status
+const refunds = payments.filter(p =>
+  p.type.toLowerCase().includes('refund')
+);
+
+if (refunds.length > 0) {
+  const refundTotal = refunds.reduce((sum, r) => sum + r.amount, 0);
+
+  document.getElementById('refundStatus').textContent =
+    `$${refundTotal.toFixed(2)} pending`;
+} else {
+  document.getElementById('refundStatus').textContent =
+    'No refunds pending';
+}
+
+// Last payment
+if (payments.length > 0) {
+  document.getElementById('lastPaymentDate').textContent =
+    payments[0].date;
+}
+
+// --- Populate payment history table ---
+const tbody = document.getElementById('paymentsTableBody');
+
+payments.forEach((p, index) => {
+
+  const reference = `FRD-${revenueNumber.slice(0, 3)}-${1000 + index}`;
+
+  const statusClass =
+    p.status === 'Completed'
+      ? 'bg-emerald-100 text-emerald-700'
+      : 'bg-amber-100 text-amber-700';
+
+  const row = document.createElement('tr');
+
+  row.innerHTML = `
+    <td class="px-6 py-5 font-medium text-slate-900">${reference}</td>
+
+    <td class="px-6 py-5 text-slate-600">
+      ${p.date}
+    </td>
+
+    <td class="px-6 py-5">
+      <div class="font-medium text-slate-900">${p.type}</div>
+      <div class="text-xs text-slate-500 mt-1">
+        Processed through MyRevenue online services
+      </div>
+    </td>
+
+    <td class="px-6 py-5 text-slate-600">
+      Online Banking
+    </td>
+
+    <td class="px-6 py-5 font-semibold text-slate-900">
+      $${p.amount.toFixed(2)}
+    </td>
+
+    <td class="px-6 py-5">
+      <span class="px-3 py-1 rounded-full text-xs font-semibold ${statusClass}">
+        ${p.status}
+      </span>
+    </td>
+  `;
+
+  tbody.appendChild(row);
+});
+
+    
   </script>
 
 </body>
 </html>
+
+    
