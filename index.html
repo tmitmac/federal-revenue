@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Federal Revenue Department | Square Country</title>
+  
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
 
   <script>
     tailwind.config = {
@@ -104,30 +107,96 @@
         </ul>
         <div class="bg-slate-50 rounded-2xl p-6">
           <p class="text-sm text-slate-600 mb-4">Access personalised services through MyRevenue.</p>
-          <a href="login.html" class="inline-block bg-accent text-white px-5 py-2.5 rounded-xl font-semibold">Sign in</a>
+          <a href="login.html" class="inline-block bg-accent hover:opacity-90 text-white px-5 py-2.5 rounded-xl font-semibold">Sign in</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Business -->
-  <section id="business" class="max-w-7xl mx-auto px-6 py-16">
-    <h3 class="text-2xl font-bold mb-8">Business & organisations</h3>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h4 class="font-semibold mb-2">Register a business</h4>
-        <p class="text-sm text-slate-600">Get a revenue number, GST registration, and employer details.</p>
+<!-- Business -->
+<section id="business" class="max-w-7xl mx-auto px-6 py-16">
+
+  <h3 class="text-2xl font-bold mb-8">
+    Business & organisations
+  </h3>
+
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <a href="https://tmitmac.github.io/Square-Country-Government/business-application-form.html"
+      class="group bg-white rounded-2xl shadow p-6 border border-slate-200 hover:border-accent hover:bg-slate-50 transition-all duration-200">
+
+      <div class="flex items-center justify-between mb-4">
+
+        <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+          <i data-feather="briefcase"></i>
+        </div>
+
+        <i data-feather="arrow-right"
+          class="w-4 h-4 text-slate-400 group-hover:text-accent transition"></i>
+
       </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h4 class="font-semibold mb-2">GST & sales tax</h4>
-        <p class="text-sm text-slate-600">File returns, manage periods, and claim credits.</p>
+
+      <h4 class="font-semibold text-slate-900 mb-2">
+        Register a business
+      </h4>
+
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Get a revenue number, GST registration, and employer account details.
+      </p>
+
+    </a>
+
+    <a href="gst.html"
+      class="group bg-white rounded-2xl shadow p-6 border border-slate-200 hover:border-accent hover:bg-slate-50 transition-all duration-200">
+
+      <div class="flex items-center justify-between mb-4">
+
+        <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+          <i data-feather="percent"></i>
+        </div>
+
+        <i data-feather="arrow-right"
+          class="w-4 h-4 text-slate-400 group-hover:text-accent transition"></i>
+
       </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h4 class="font-semibold mb-2">Employers</h4>
-        <p class="text-sm text-slate-600">PAYE filing, payroll reporting, and contributions.</p>
+
+      <h4 class="font-semibold text-slate-900 mb-2">
+        GST & sales tax
+      </h4>
+
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Find information, manage taxable periods, and claim GST credits.
+      </p>
+
+    </a>
+
+    <a href="#"
+      class="group bg-white rounded-2xl shadow p-6 border border-slate-200 hover:border-accent hover:bg-slate-50 transition-all duration-200">
+
+      <div class="flex items-center justify-between mb-4">
+
+        <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+          <i data-feather="users"></i>
+        </div>
+
+        <i data-feather="arrow-right"
+          class="w-4 h-4 text-slate-400 group-hover:text-accent transition"></i>
+
       </div>
-    </div>
-  </section>
+
+      <h4 class="font-semibold text-slate-900 mb-2">
+        Employers
+      </h4>
+
+      <p class="text-sm text-slate-600 leading-relaxed">
+        PAYE filing, payroll reporting, withholding tax, and contributions.
+      </p>
+
+    </a>
+
+  </div>
+
+</section>
 
   <!-- Forms -->
   <section id="forms" class="bg-white">
@@ -170,5 +239,8 @@
     </div>
   </footer>
 
+  <script>
+    feather.replace();
+  </script>
 </body>
 </html>
